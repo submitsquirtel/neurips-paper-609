@@ -1,0 +1,9 @@
+Metadata-Version: 2.2
+Name: scene_generation
+Version: 0.1
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+Requires-Dist: matplotlib
+Requires-Dist: opencv-python
+Requires-Dist: pyyaml
+Dynamic: requires-dist

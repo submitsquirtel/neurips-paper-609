@@ -1,0 +1,17 @@
+scene_name: "task_0011_user_0010_scene_0009_cfg_0005"
+proprioception_path: "./data/scene2/task_0003_user_0016_scene_0010_cfg_0003/transformed/joint.npy"
+object_position: "data/scene/task_0011_user_0010_scene_0009_cfg_0005/masks/transformations.json"
+camera_to_use: "036422060909"
+camera_serial: "036422060215"
+data_type: "rh20t"
+use_bypass: false
+use_molmo: false
+sam2gemini:
+    mask_folder: "./data/scene/task_0011_user_0010_scene_0009_cfg_0005/bounding_boxes_and_masks"
+    rgb_folder : "./data/scene/task_0011_user_0010_scene_0009_cfg_0005/images0"
+    pcd_folder : "./data/scene/task_0011_user_0010_scene_0009_cfg_0005/pcds"
+bypass:
+    scene_video: "./data/scene/task_0011_user_0010_scene_0009_cfg_0005/video.mp4"
+    object_mask_video: "./data/scene/task_0011_user_0010_scene_0009_cfg_0005/mask.mp4"
+    robot_mask_video: "./data/scene/task_0011_user_0010_scene_0009_cfg_0005/robot_mask.mp4"
+    output_folder: "./data/incput_mask/task_0011_user_0010_scene_0009_cfg_0005/"

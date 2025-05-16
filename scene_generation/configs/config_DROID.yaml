@@ -1,0 +1,88 @@
+environment:
+  device: "cuda"  # Set to "cuda" if using GPU, otherwise "cpu"
+  precision: "bfloat16"  # Precision setting for model (float16, bfloat16, etc.)
+
+use_bypass: false
+dataset: "droid" 
+paths:
+  data_dir: "./data/DROID"
+  result_dir : "./output"
+  video_file : "video.mp4"
+  genimi_input_json: "images0.json"
+  intrinsics: "intrinsics.npy"
+  extrinsics: "extrinsics.npy"
+  sam2_checkpoint: "../sam/checkpoints/sam2.1_hiera_large.pt"  # Path to SAM 2 checkpoint
+  model_cfg: "configs/sam2.1/sam2.1_hiera_l.yaml"  # SAM 2 model configuration file
+  MINIMA_checkpoint: "./MINIMA/weights"  # Path to MINIMA checkpoint
+
+assets:
+  asset_dir: "./data/assets"
+
+noise_removal:
+  nb_neighbors: 80
+  std_ratio: 0.5
+  distance_threshold: 0.03
+  ransac_n: 3
+  num_iterations: 500
+
+icp:
+  initial_threshold: 0.012
+  fine_threshold: 0.008
+  final_threshold: 0.006
+  max_iterations: 2000
+
+
+models:
+  grounding_dino:
+    model_id: "IDEA-Research/grounding-dino-tiny"  # Model ID for Grounding DINO from HuggingFace
+    device: "cuda"  # Use "cuda" if running on GPU, otherwise "cpu"
+
+  gemini:
+    api_key: <YOUR_GEMINI_API_KEY>  # Replace with your Gemini API key
+    project_id: "geminiplanning"  # Gemini project ID
+    # model_name: "models/gemini-2.5-pro-preview-03-25"  # Name of the Gemini model
+    model_name: "models/gemini-2.5-flash-preview-04-17"
+
+
+prompts:
+  default: "Please describe step-by-step actions and their corresponding starting and ending frames in the video."
+  gemini_robot: Give segmentation masks for the robot (robot arm and robot gripper) in the scene. Output a JSON list of segmentation masks where each entry contains the 2D bounding box in "box_2d", a descriptive text label in "label", and the mask in "mask".
+  gemini_mask: |
+    Give segmentation masks for all important complete foreground objects on the plane which the robot interacts with.
+    Return a JSON list, where each entry contains:
+    - 'box_2d': the 2D bounding box 
+    - 'mask': the segmentation mask 
+    - 'mass': estimated object mass in kilograms (float)
+    - 'friction': estimated friction coefficient (float)
+    - 'surface_type': one of [Glass, Water, Emission, Plastic, Rough, Smooth, Reflective, Metal, Iron, Aluminium, Copper, Gold]
+    - 'label': a descriptive text label.
+    Labeling rules:
+    - Ignore background objects and irrelevant surfaces, or any objects that are occluded, covered, severely blocked by other objects.
+  foreground_objects: "Analyze the video and list all foreground objects the robot interacts with. Ensure to describe each object fully, including its color if necessary. Use only lowercase letters. Please only provide the object name, separate each object description with a period without any other things and response as short as possible. Output format: object1. object2. object3. object4."
+  task_specific:
+    task: ""  # You can specify a task prompt here for different video analysis tasks
+
+# Step 5: Tracking and Video Generation Settings
+tracking:
+  prompt_type: "point"  # Can be "point", "box", or "mask" for SAM 2 video predictor
+  num_sample_points: 10  # Number of points to sample if using point prompts
+
+# Step 6: Grounding DINO and SAM 2 settings
+grounding_dino:
+  threshold: 0.3  # Threshold for filtering object detections
+  box_threshold: 0.25  # Threshold for bounding box confidence in Grounding DINO
+
+sam2:
+  use_multimask_output: true  # Set to True if using multiple mask outputs for SAM 2
+
+gemini_mask: true
+
+molmo:
+  enabled: true  # Set to True if using MoLMO for video generation
+  cache_dir: <YOUR_CACHE_DIR>  # Path to cache directory for MoLMO
+  text: 'Please point me to all foreground objects the robot interacts with in the scene and do not point to the robot itself.'
+
+SoM:
+  enabled: false  # Set to True if using SoM for video generation
+  pronun_gemini: false  # Set to True if using Gemini for pronunciation
+  gemini_prompt: "Select the set of mark annotations which give the bounding box for all foreground object in the image other then the robot. Do not output anything else then the mark number. Make sure you take only rigid objects and do not consider large surfaces. Do not confuse parts of large surfaces as well. Output Format: 1,2,3"

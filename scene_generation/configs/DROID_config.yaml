@@ -1,0 +1,17 @@
+scene_name: "droid22"
+robot: "WidowX"
+proprioception_path: "data/DROID/droid22/joints.npy"
+camera_to_use: "036422060909"
+object_position: "data/DROID/droid22/masks/transformations_new.json"
+data_type: "droid"
+use_bypass: false
+use_molmo: false
+sam2gemini:
+    mask_folder: "./data/DROID/droid22/bounding_boxes_and_masks"
+    rgb_folder : "./data/DROID/droid22/images0"
+    pcd_folder : "./data/DROID/droid22/pcds"
+bypass:
+    scene_video: "./data/DROID/droid22/video.mp4"
+    object_mask_video: "./data/DROID/droid22/mask.mp4"
+    robot_mask_video: "./data/DROID/droid22/robot_mask.mp4"
+    output_folder: "./data/input_mask/droid22/"

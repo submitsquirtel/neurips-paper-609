@@ -1,0 +1,5 @@
+Collecting attrs
+  Using cached attrs-25.3.0-py3-none-any.whl.metadata (10 kB)
+Using cached attrs-25.3.0-py3-none-any.whl (63 kB)
+Installing collected packages: attrs
+Successfully installed attrs-25.3.0
