@@ -9,4 +9,4 @@ In `benchmark_eval` folder, we provide the code for systematic  evaluation of ro
 
 ## 2. Scene Placement in Simulation (Real2Sim)
 
-In `scene_generation` folder, we provide the code for reconstructing real-world scenes such as scenes in **bridge dataset** into simulation environments. The code is designed to be modular, allowing for easy integration of new datasets and environments. The scene generation process is divided into three main components:
+In `scene_generation` folder, we provide the code for automatically reconstructing real-world scenes into simulation environments.
