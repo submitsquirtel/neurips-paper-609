@@ -1,0 +1,17 @@
+scene_name: "scene59"
+proprioception_path: "data/bridge/scene59/obs_dict.pkl"
+camera_to_use: ""
+object_position: "data/bridge/scene59/masks/transformations_new.json"
+data_type: "bridge"
+robot: "WidowX"
+use_bypass: false
+use_molmo: false
+sam2gemini:
+    mask_folder: "./data/bridge/scene59/bounding_boxes_and_masks"
+    rgb_folder : "./data/bridge/scene59/images0"
+    pcd_folder : "./data/bridge/scene59/pcds"
+bypass:
+    scene_video: "./data/bridge/scene59/video.mp4"
+    object_mask_video: "./data/bridge/scene59/mask.mp4"
+    robot_mask_video: "./data/bridge/scene59/robot_mask.mp4"
+    output_folder: "./data/input_mask/scene59/" # Where bypass stage outputs masks

@@ -1,0 +1,17 @@
+scene_name: "scene40"
+robot: "WidowX"
+proprioception_path: "data/bridge/scene40/obs_dict.pkl"
+camera_to_use: "null"
+object_position: "data/bridge/scene40/masks/transformations_new.json"
+data_type: "bridge"
+use_bypass: false
+use_molmo: false
+sam2gemini:
+    mask_folder: "./data/bridge/scene40/bounding_boxes_and_masks"
+    rgb_folder : "./data/bridge/scene40/images0"
+    pcd_folder : "./data/bridge/scene40/pcds"
+bypass:
+    scene_video: "./data/bridge/scene40/video.mp4"
+    object_mask_video: "./data/bridge/scene40/mask.mp4"
+    robot_mask_video: "./data/bridge/scene40/robot_mask.mp4"
+    output_folder: "./data/input_mask/scene40/"
